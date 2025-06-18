@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Dose of Dev</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', sans-serif;
+      background: #fff9f2;
+      color: #222;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: linear-gradient(90deg, #ff6ec4, #7873f5);
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 2rem;
+    }
+    main {
+      padding: 1.5rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    h2 {
+      color: #ff6ec4;
+      font-size: 1.8rem;
+      margin-top: 2rem;
+    }
+    ol {
+      background: #fff0e6;
+      border-radius: 10px;
+      padding: 1rem;
+      font-size: 1.2rem;
+    }
+    li {
+      margin-bottom: 0.5rem;
+    }
+    form {
+      background: #e0f7fa;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-top: 2rem;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    input, textarea, button {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    button {
+      background: #7873f5;
+      color: white;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    🎉 Unequivocal, Undeniable, Universally True Top 10's 🎉
+  </header>
+  <main>
+    <h2>Top 10 TV Shows</h2>
+    <p><em>A mix of comedy, drama, animation, and action — this is the ultimate list of shows I’d recommend to just about anyone.</em></p>
+    <ol>
+      <li>Andor</li>
+      <li>Arcane</li>
+      <li>Samurai Champloo</li>
+      <li>Harley Quinn</li>
+      <li>Peaky Blinders</li>
+      <li>Mad Men</li>
+      <li>Band of Brothers</li>
+      <li>Seinfeld</li>
+      <li>Bob’s Burgers</li>
+      <li>Frieren: Beyond Journey’s End</li>
+    </ol>
+
+    <h2>Suggest a Top 10 Topic</h2>
+    <form>
+      <label for="topic">Suggested Topic</label>
+      <input type="text" id="topic" name="topic" placeholder="e.g. Best Animated Movies" />
+      <button type="submit">Submit Suggestion</button>
+    </form>
+
+    <h2>Create Your Own Top 10</h2>
+    <form>
+      <label for="title">List Title</label>
+      <input type="text" id="title" name="title" placeholder="e.g. Top 10 Sandwiches" />
+      <label for="items">Your Top 10 Items (1 per line)</label>
+      <textarea id="items" name="items" rows="10" placeholder="1. ...
+2. ...
+3. ..."></textarea>
+      <button type="submit">Create List</button>
+    </form>
+  </main>
+</body>
+</html>
