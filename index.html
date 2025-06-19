@@ -18,61 +18,64 @@
       color: white;
       padding: 1.5rem;
       text-align: center;
-      font-size: 1rem;
+      font-size: 1.2rem;
       text-shadow: 2px 2px 4px #000;
       letter-spacing: 2px;
     }
     header h1 {
       margin: 0;
-      font-size: 1.2rem;
+      font-size: 1.5rem;
       text-decoration: underline;
+      letter-spacing: 2px;
       text-shadow: 2px 2px #000;
     }
     main {
-      padding: 1.5rem;
+      padding: 2rem;
       max-width: 800px;
       margin: auto;
       text-align: center;
     }
     h2 {
       color: #ff99ff;
-      font-size: 1rem;
+      font-size: 1.2rem;
       margin-top: 1.5rem;
       text-transform: uppercase;
     }
     p.description {
       color: #c2c2ff;
-      font-size: 0.75rem;
+      font-size: 0.85rem;
       margin-top: 0.25rem;
       font-style: italic;
       min-height: 2.5em;
+    }
+    #top10-section {
+      transition: opacity 0.75s ease-in-out;
+      opacity: 1;
+      min-height: 480px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     ol {
       background: #1a0933;
       border-radius: 10px;
       padding: 1rem 1rem 1rem 4rem;
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       color: #00ffe0;
       box-shadow: 0 0 15px #ff00cc50;
       list-style-position: outside;
-      margin: 1.5rem auto;
+      margin: 1.5rem auto 1rem;
       max-width: 400px;
       text-align: left;
     }
     li {
       margin-bottom: 0.5rem;
     }
-    li:hover {
-      color: #ff00cc;
-      cursor: pointer;
-      text-shadow: 1px 1px 2px #000;
-    }
     .nav-buttons {
       margin-top: 1rem;
       display: flex;
       justify-content: center;
       gap: 1rem;
-      flex-wrap: wrap;
     }
     button {
       background: #ff00cc;
@@ -85,21 +88,11 @@
       border-radius: 6px;
       box-shadow: 0 0 10px #ff00cc80;
       font-family: 'Press Start 2P', monospace;
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       transition: background 0.3s ease;
     }
     button:hover {
       background: #e600b8;
-    }
-    @media (max-width: 600px) {
-      button {
-        font-size: 0.6rem;
-        padding: 0.6rem 0.8rem;
-      }
-      ol {
-        font-size: 0.65rem;
-        padding-left: 2.5rem;
-      }
     }
     form {
       background: #150030;
@@ -132,41 +125,20 @@
       font-family: 'Press Start 2P', monospace;
       resize: vertical;
     }
-    #form-status {
-      font-size: 0.75rem;
-      margin-top: 0.5rem;
-    }
-    #form-status.success {
-      color: #00ff88;
-    }
-    #form-status.error {
-      color: #ff6666;
-    }
-    #form-spinner {
-      display: none;
-      font-size: 0.75rem;
-      margin-top: 0.5rem;
-      color: #ff99ff;
-    }
-
-    #top10-section {
-      transition: opacity 0.5s ease;
-      opacity: 1;
-    }
   </style>
 </head>
 <body>
-  <header role="banner">
+  <header>
     <h1><u>Unequivocal, Undeniable, Universal Truths</u></h1> 
   </header>
-  <main role="main">
+  <main>
     <section id="top10-section">
       <h2 id="list-title"></h2>
       <p class="description" id="list-description"></p>
       <ol id="list-items"></ol>
       <div class="nav-buttons">
-        <button id="prev-btn" aria-label="Previous List">Previous</button>
-        <button id="next-btn" aria-label="Next List">Next</button>
+        <button id="prev-btn">Previous</button>
+        <button id="next-btn">Next</button>
       </div>
     </section>
 
@@ -179,8 +151,6 @@
       <textarea id="details" name="details" rows="4" placeholder="Explain why this topic is interesting, you can also submit 10 items here and have me rank them!"></textarea>
       
       <button type="submit">Submit Suggestion</button>
-      <div id="form-spinner">Sending...</div>
-      <div id="form-status" role="status"></div>
     </form>
   </main>
 
@@ -190,39 +160,65 @@
         title: "Top 10 TV Shows",
         description: "",
         items: [
-          "Andor", "Arcane", "Samurai Champloo", "Harley Quinn",
-          "Peaky Blinders", "Mad Men", "Band of Brothers",
-          "Seinfeld", "Bob’s Burgers", "Frieren: Beyond Journey’s End",
+          "Andor",
+          "Arcane",
+          "Samurai Champloo",
+          "Harley Quinn",
+          "Peaky Blinders",
+          "Mad Men",
+          "Band of Brothers",
+          "Seinfeld",
+          "Bob’s Burgers",
+          "Frieren: Beyond Journey’s End",
         ],
       },
       {
         title: "Top 10 Video Games",
         description: "",
         items: [
-          "Destiny/Destiny 2", "Halo 3", "Golden sun TLA",
-          "Battlefield 3", "Medieval 2: Total War",
-          "Modern Warfare 2", "Stellaris", "Age of Empires 2",
-          "Horizon: Zero Dawn", "Balatro"
+          "Destiny/Destiny 2",
+          "Halo 3",
+          "Golden sun TLA",
+          "Battlefield 3",
+          "Medieval 2: Total War",
+          "Modern Warfare 2",
+          "Stellaris",
+          "Age of Empires 2",
+          "Horizon: Zero Dawn",
+          "Balatro"
         ],
       },
       {
         title: "Star Wars Ranked",
         description: "",
         items: [
-          "Revenge of the Sith", "Empire Strikes Back", "Return of the Jedi",
-          "Rogue One", "A New Hope", "The Phantom Menace",
-          "Attack of the Clones", "The Force Awakens",
-          "Solo", "The Last Jedi", "The Rise of Skywalker"
+          "Revenge of the Sith",
+          "Empire Strikes Back",
+          "Return of the Jedi",
+          "Rogue One",
+          "A New Hope",
+          "The Phantom Menace",
+          "Attack of the Clones",
+          "The Force Awakens",
+          "Solo",
+          "The Last Jedi",
+          "The Rise of Skywalker"
         ],
       },
       {
         title: "Top 10 Animated Movies",
         description: "",
         items: [
-          "Princess Mononoke", "Into the Spiderverse", "Your Name",
-          "How to Train your Dragon", "Prince of Egypt",
-          "Winnie the Pooh", "Fantastic Mr Fox",
-          "Meet the Robinsons", "Emperor’s new Groove", "Megamind",
+          "Princess Mononoke",
+          "Into the Spiderverse",
+          "Your Name",
+          "How to Train your Dragon",
+          "Prince of Egypt",
+          "Winnie the Pooh",
+          "Fantastic Mr Fox",
+          "Meet the Robinsons",
+          "Emperor’s new Groove",
+          "Megamind",
         ],
       },
     ];
@@ -246,7 +242,7 @@
           itemsEl.appendChild(li);
         });
         top10Section.style.opacity = 1;
-      }, 300);
+      }, 400); // slightly longer to match transition
     }
 
     function showNext() {
@@ -261,54 +257,16 @@
 
     document.getElementById("next-btn").addEventListener("click", showNext);
     document.getElementById("prev-btn").addEventListener("click", showPrev);
+
     document.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowRight") showNext();
-      else if (e.key === "ArrowLeft") showPrev();
-    });
-
-    // Swipe support
-    let touchStartX = 0;
-    document.addEventListener("touchstart", (e) => {
-      touchStartX = e.touches[0].clientX;
-    });
-    document.addEventListener("touchend", (e) => {
-      const touchEndX = e.changedTouches[0].clientX;
-      const diff = touchEndX - touchStartX;
-      if (diff > 50) showPrev();
-      if (diff < -50) showNext();
-    });
-
-    // Form submission with feedback
-    const form = document.querySelector("form");
-    const status = document.getElementById("form-status");
-    const spinner = document.getElementById("form-spinner");
-
-    form.addEventListener("submit", async function (e) {
-      e.preventDefault();
-      status.textContent = "";
-      spinner.style.display = "block";
-      const data = new FormData(form);
-      try {
-        const res = await fetch(form.action, {
-          method: form.method,
-          body: data,
-          headers: { Accept: "application/json" },
-        });
-        spinner.style.display = "none";
-        if (res.ok) {
-          status.textContent = "Thanks! We'll consider your ranking.";
-          status.className = "success";
-          form.reset();
-        } else {
-          status.textContent = "Oops! Something went wrong.";
-          status.className = "error";
-        }
-      } catch {
-        spinner.style.display = "none";
-        status.textContent = "Submission failed. Please try again.";
-        status.className = "error";
+      if (e.key === "ArrowRight") {
+        showNext();
+      } else if (e.key === "ArrowLeft") {
+        showPrev();
       }
     });
 
     renderList(currentIndex);
   </script>
+</body>
+</html>
