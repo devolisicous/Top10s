@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,6 +21,10 @@
       font-family: 'Press Start 2P', monospace;
       margin: 0;
       padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     header {
@@ -31,6 +35,7 @@
       font-size: clamp(0.8rem, 2.5vw, 1.2rem);
       text-shadow: 2px 2px 4px #000;
       letter-spacing: 2px;
+      width: 100%;
     }
 
     header h1 {
@@ -44,7 +49,12 @@
       padding: 1.5rem;
       max-width: 800px;
       margin: auto;
+      width: 100%;
       text-align: center;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     h2 {
@@ -73,6 +83,16 @@
       margin: 1.5rem auto;
       max-width: 95%;
       text-align: left;
+      opacity: 1;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    /* Hidden list style */
+    ol.hidden {
+      opacity: 0;
+      position: absolute;
+      pointer-events: none;
+      user-select: none;
     }
 
     li {
@@ -100,10 +120,17 @@
       font-family: 'Press Start 2P', monospace;
       font-size: clamp(0.6rem, 2vw, 0.75rem);
       transition: background 0.3s ease;
+      min-width: 120px;
     }
 
-    button:hover {
+    button:hover:not(:disabled) {
       background: #e600b8;
+    }
+
+    button:disabled {
+      background: #660055;
+      cursor: default;
+      box-shadow: none;
     }
 
     form {
@@ -114,8 +141,10 @@
       box-shadow: 0 0 10px #00ffe050;
       text-align: left;
       max-width: 500px;
+      width: 90%;
       margin-left: auto;
       margin-right: auto;
+      font-family: 'Press Start 2P', monospace;
     }
 
     label {
@@ -137,6 +166,32 @@
       background-color: var(--panel-bg);
       color: var(--text);
       font-family: 'Press Start 2P', monospace;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 480px) {
+      ol {
+        padding-left: 3rem;
+        font-size: 0.7rem;
+      }
+      button {
+        min-width: 100px;
+        padding: 0.5rem 1rem;
+        font-size: 0.65rem;
+      }
+      header {
+        font-size: 1rem;
+        padding: 1rem;
+      }
+      header h1 {
+        font-size: 1.2rem;
+      }
     }
   </style>
 </head>
@@ -145,46 +200,114 @@
     <h1><u>Unequivocal, Undenyable, Universal Truths</u></h1>
   </header>
   <main>
-    <!-- Top 10 list display (assumed from your previous code) -->
-    <h2>Top 10 TV Shows</h2>
-    <p class="description">
-     
-    </p>
-    <ol>
-      <li>Andor</li>
-      <li>Arcane</li>
-      <li>Samurai Champloo</li>
-      <li>Harley Quinn</li>
-      <li>Peaky Blinders</li>
-      <li>Mad Men</li>
-      <li>Band of Brothers</li>
-      <li>Seinfeld</li>
-      <li>Bob’s Burgers</li>
-      <li>Frieren: Beyond Journey’s End</li>
-    </ol>
+    <section aria-live="polite" aria-atomic="true">
+      <h2 id="list-title">Top 10 TV Shows</h2>
+      <p class="description" id="list-description">
+        A mix of comedy, drama, animation, and action — this is the ultimate list of shows I’d recommend to just about anyone.
+      </p>
+      <ol id="top10-list">
+        <li>Andor</li>
+        <li>Arcane</li>
+        <li>Samurai Champloo</li>
+        <li>Harley Quinn</li>
+        <li>Peaky Blinders</li>
+        <li>Mad Men</li>
+        <li>Band of Brothers</li>
+        <li>Seinfeld</li>
+        <li>Bob’s Burgers</li>
+        <li>Frieren: Beyond Journey’s End</li>
+      </ol>
+    </section>
+
+    <div class="nav-buttons" role="group" aria-label="Top 10 lists navigation">
+      <button id="prev-btn" aria-controls="top10-list list-title list-description">Previous</button>
+      <button id="next-btn" aria-controls="top10-list list-title list-description">Next</button>
+    </div>
 
     <!-- Suggest a Ranking Topic form with Formspree -->
     <h2>Suggest a Ranking Topic</h2>
-    <form id="suggestion-form" action="https://formspree.io/f/xblykblv" method="POST">
-      <label for="topic">What kind of ranking ist should I make next?</label>
+    <form
+      id="suggestion-form"
+      action="https://formspree.io/f/xblykblv"
+      method="POST"
+      >
+      <label for="topic">What kind of ranking list should I make next?</label>
       <input
         type="text"
         id="topic"
         name="topic"
         placeholder="e.g. Best Gamecube Games"
         required
+        autocomplete="off"
       />
 
       <label for="notes">Optional Notes</label>
-      <input
-        type="text"
+      <textarea
         id="notes"
         name="notes"
         placeholder="Why this topic? (optional)"
-      />
+        rows="3"
+        autocomplete="off"
+      ></textarea>
 
       <button type="submit">Submit Suggestion</button>
     </form>
   </main>
-</body>
-</html>
+
+  <script>
+    (function() {
+      const lists = [
+        {
+          title: "Top 10 TV Shows",
+          description: "A mix of comedy, drama, animation, and action — this is the ultimate list of shows I’d recommend to just about anyone.",
+          items: [
+            "Andor",
+            "Arcane",
+            "Samurai Champloo",
+            "Harley Quinn",
+            "Peaky Blinders",
+            "Mad Men",
+            "Band of Brothers",
+            "Seinfeld",
+            "Bob’s Burgers",
+            "Frieren: Beyond Journey’s End"
+          ]
+        },
+        {
+          title: "Top 10 Video Games",
+          description: "",
+          items: [
+            "Destiny/Destiny 2",
+            "Halo 3",
+            "Golden sun TLA",
+            "Battlefield 3",
+            "Medieval 2: Total War",
+            "Modern Warfare 2",
+            "Stellaris",
+            "Age of Empires 2",
+            "Horizon: Zero Dawn",
+            "Balatro"
+          ]
+        },
+        {
+          title: "Star Wars Ranked",
+          description: "",
+          items: [
+            "Revenge of the Sith",
+            "Empire Strikes Back",
+            "Return of the Jedi",
+            "Rogue One",
+            "A New Hope",
+            "The Phantom Menace",
+            "Attack of the Clones",
+            "The Force Awakens",
+            "Solo",
+            "The Last Jedi",
+            "The Rise of Skywalker"
+          ]
+        },
+        {
+          title: "Top 10 Animated Movies",
+          description: "",
+          items: [
+            "Prince
