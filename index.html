@@ -224,14 +224,14 @@
       <button id="next-btn" aria-controls="top10-list list-title list-description">Next</button>
     </div>
 
-    <!-- Suggest a Ranking Topic form with Formspree -->
-    <h2>Suggest a Ranking Topic</h2>
+    <!-- Suggest a Top 10 Topic form with Formspree -->
+    <h2>Suggest a Top 10 Topic</h2>
     <form
       id="suggestion-form"
-      action="https://formspree.io/f/xblykblv"
+      action="https://formspree.io/f/YOUR_FORM_ID"
       method="POST"
       >
-      <label for="topic">What kind of ranking list should I make next?</label>
+      <label for="topic">What kind of Top 10 list should I make next?</label>
       <input
         type="text"
         id="topic"
@@ -255,11 +255,11 @@
   </main>
 
   <script>
-    (function() {
+    document.addEventListener("DOMContentLoaded", () => {
       const lists = [
         {
           title: "Top 10 TV Shows",
-          description: "A mix of comedy, drama, animation, and action — this is the ultimate list of shows I’d recommend to just about anyone.",
+          description: "",
           items: [
             "Andor",
             "Arcane",
@@ -310,4 +310,63 @@
           title: "Top 10 Animated Movies",
           description: "",
           items: [
-            "Prince
+            "Princess Mononoke",
+            "Into the Spiderverse",
+            "Your Name",
+            "How to Train your Dragon",
+            "Prince of Egypt",
+            "Winnie the Pooh",
+            "Fantastic Mr Fox",
+            "Meet the Robinsons",
+            "Megamind",
+            "Emperor’s New Groove"
+          ]
+        }
+      ];
+
+      let currentIndex = 0;
+
+      const titleEl = document.getElementById("list-title");
+      const descEl = document.getElementById("list-description");
+      const listEl = document.getElementById("top10-list");
+      const prevBtn = document.getElementById("prev-btn");
+      const nextBtn = document.getElementById("next-btn");
+
+      function updateList(index) {
+        listEl.style.opacity = 0;
+        titleEl.style.opacity = 0;
+        descEl.style.opacity = 0;
+
+        setTimeout(() => {
+          const list = lists[index];
+          titleEl.textContent = list.title;
+          descEl.textContent = list.description || "";
+
+          listEl.innerHTML = "";
+          list.items.forEach(item => {
+            const li = document.createElement("li");
+            li.textContent = item;
+            listEl.appendChild(li);
+          });
+
+          listEl.style.opacity = 1;
+          titleEl.style.opacity = 1;
+          descEl.style.opacity = 1;
+        }, 400);
+      }
+
+      prevBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex - 1 + lists.length) % lists.length;
+        updateList(currentIndex);
+      });
+
+      nextBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % lists.length;
+        updateList(currentIndex);
+      });
+
+      updateList(currentIndex);
+    });
+  </script>
+</body>
+</html>
