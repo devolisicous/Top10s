@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Unequivocal, Undenyable, Universal Truths</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
   <style>
     body {
       background: #0d0221;
@@ -13,7 +13,6 @@
       margin: 0;
       padding: 0;
     }
-
     header {
       background: linear-gradient(90deg, #ff00cc, #3333ff);
       color: white;
@@ -23,7 +22,6 @@
       text-shadow: 2px 2px 4px #000;
       letter-spacing: 2px;
     }
-
     header h1 {
       margin: 0;
       font-size: 1.5rem;
@@ -31,57 +29,82 @@
       letter-spacing: 2px;
       text-shadow: 2px 2px #000;
     }
-
     main {
       padding: 2rem;
       max-width: 800px;
       margin: auto;
+      text-align: center;
     }
-
     h2 {
       color: #ff99ff;
-      font-size: 1rem;
-      margin-top: 2rem;
+      font-size: 1.2rem;
+      margin-top: 1.5rem;
       text-transform: uppercase;
     }
-
-    p {
+    p.description {
       color: #c2c2ff;
-      font-size: 0.75rem;
-      line-height: 1.5;
+      font-size: 0.85rem;
+      margin-top: 0.25rem;
+      font-style: italic;
+      min-height: 2.5em;
     }
-
-ol {
-  background: #1a0933;          /* purple background */
-  border-radius: 10px;          /* rounded corners */
-  padding: 1rem 1rem 1rem 2.5rem; /* top/right/bottom/left padding with extra left padding to shift numbers */
-  font-size: 0.75rem;
-  color: #00ffe0;               /* neon cyan text */
-  box-shadow: 0 0 15px #ff00cc50; /* glow effect */
-  list-style-position: outside; /* keep numbers outside text */
-  margin: 0;                   /* reset margin if needed */
-}
-
+    ol {
+      background: #1a0933;
+      border-radius: 10px;
+      padding: 1rem 1rem 1rem 2.5rem;
+      font-size: 0.75rem;
+      color: #00ffe0;
+      box-shadow: 0 0 15px #ff00cc50;
+      list-style-position: outside;
+      margin: 1.5rem auto;
+      max-width: 400px;
+      text-align: left;
+    }
     li {
       margin-bottom: 0.5rem;
     }
-
+    .nav-buttons {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+    button {
+      background: #ff00cc;
+      color: white;
+      cursor: pointer;
+      text-transform: uppercase;
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      box-shadow: 0 0 10px #ff00cc80;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.75rem;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #e600b8;
+    }
     form {
       background: #150030;
       padding: 1rem;
       border-radius: 10px;
       margin-top: 2rem;
       box-shadow: 0 0 10px #00ffe050;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
     }
-
     label {
       display: block;
       margin-top: 1rem;
       color: #ff66cc;
       font-size: 0.75rem;
     }
-
-    input, textarea, button {
+    input,
+    textarea,
+    button[type="submit"] {
       width: 100%;
       padding: 0.5rem;
       margin-top: 0.5rem;
@@ -90,19 +113,7 @@ ol {
       font-size: 0.75rem;
       background-color: #1a0933;
       color: #00ffe0;
-    }
-
-    button {
-      background: #ff00cc;
-      color: white;
-      cursor: pointer;
-      text-transform: uppercase;
-      font-weight: bold;
-      box-shadow: 0 0 10px #ff00cc80;
-    }
-
-    button:hover {
-      background: #e600b8;
+      font-family: 'Press Start 2P', monospace;
     }
   </style>
 </head>
@@ -111,20 +122,15 @@ ol {
     <h1><u>Unequivocal, Undenyable, Universal Truths</u></h1>
   </header>
   <main>
-    <h2>Top 10 TV Shows</h2>
-    <p><em>A mix of comedy, drama, animation, and action — this is the ultimate list of shows I’d recommend to just about anyone.</em></p>
-    <ol>
-      <li>Andor</li>
-      <li>Arcane</li>
-      <li>Samurai Champloo</li>
-      <li>Harley Quinn</li>
-      <li>Peaky Blinders</li>
-      <li>Mad Men</li>
-      <li>Band of Brothers</li>
-      <li>Seinfeld</li>
-      <li>Bob’s Burgers</li>
-      <li>Frieren: Beyond Journey’s End</li>
-    </ol>
+    <section id="top10-section">
+      <h2 id="list-title"></h2>
+      <p class="description" id="list-description"></p>
+      <ol id="list-items"></ol>
+      <div class="nav-buttons">
+        <button id="prev-btn">Previous</button>
+        <button id="next-btn">Next</button>
+      </div>
+    </section>
 
     <h2>Suggest a Top 10 Topic</h2>
     <form>
@@ -138,9 +144,108 @@ ol {
       <label for="title">List Title</label>
       <input type="text" id="title" name="title" placeholder="e.g. Top 10 Sandwiches" />
       <label for="items">Your Top 10 Items (1 per line)</label>
-      <textarea id="items" name="items" rows="10" placeholder="1. ...\n2. ...\n3. ..."></textarea>
+      <textarea id="items" name="items" rows="10" placeholder="1. ...&#10;2. ...&#10;3. ..."></textarea>
       <button type="submit">Create List</button>
     </form>
   </main>
+
+  <script>
+    const lists = [
+      {
+        title: "Top 10 TV Shows",
+        description:
+          "A mix of comedy, drama, animation, and action — this is the ultimate list of shows I’d recommend to just about anyone.",
+        items: [
+          "Andor",
+          "Arcane",
+          "Samurai Champloo",
+          "Harley Quinn",
+          "Peaky Blinders",
+          "Mad Men",
+          "Band of Brothers",
+          "Seinfeld",
+          "Bob’s Burgers",
+          "Frieren: Beyond Journey’s End",
+        ],
+      },
+      {
+        title: "Top 10 Video Games",
+        description: "",
+        items: [
+          "Balatro",
+          "Horizon: Zero Dawn",
+          "Age of Empires 2",
+          "Stellaris",
+          "Modern Warfare 2",
+          "Medieval 2: Total War",
+          "Battlefield 3",
+          "Golden sun TLA",
+          "Halo 3",
+          "Destiny/Destiny 2",
+        ],
+      },
+      {
+        title: "Star Wars Ranked",
+        description: "",
+        items: [
+          "The Rise of Skywalker",
+          "The Last Jedi",
+          "Solo",
+          "The Force Awakens",
+          "Attack of the Clones",
+          "The Phantom Menace",
+          "A New Hope",
+          "Rogue One",
+          "Return of the Jedi",
+          "Empire Strikes Back",
+          "Revenge of the Sith",
+        ],
+      },
+      {
+        title: "Top 10 Animated Movies",
+        description: "Animated:",
+        items: [
+          "Princess Mononoke",
+          "Into the Spiderverse",
+          "Your Name",
+          "How to Train your Dragon",
+          "Winnie the Pooh",
+          "Prince of Egypt",
+          "Fantastic Mr Fox",
+          "Meet the Robinsons",
+          "Megamind",
+          "Emperor’s new Groove",
+        ],
+      },
+    ];
+
+    let currentIndex = 0;
+
+    function renderList(index) {
+      const list = lists[index];
+      document.getElementById("list-title").textContent = list.title;
+      document.getElementById("list-description").textContent = list.description || "";
+      const ol = document.getElementById("list-items");
+      ol.innerHTML = "";
+      list.items.forEach((item) => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        ol.appendChild(li);
+      });
+    }
+
+    document.getElementById("prev-btn").addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + lists.length) % lists.length;
+      renderList(currentIndex);
+    });
+
+    document.getElementById("next-btn").addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % lists.length;
+      renderList(currentIndex);
+    });
+
+    // Initial render
+    renderList(currentIndex);
+  </script>
 </body>
 </html>
