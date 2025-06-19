@@ -110,4 +110,81 @@
       background: #150030;
       padding: 1rem;
       border-radius: 10px;
-      margin-top
+      margin-top: 2rem;
+      box-shadow: 0 0 10px #00ffe050;
+      text-align: left;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      color: #ff66cc;
+      font-size: clamp(0.65rem, 2vw, 0.75rem);
+    }
+
+    input,
+    textarea,
+    button[type="submit"] {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #444;
+      font-size: clamp(0.65rem, 2vw, 0.75rem);
+      background-color: var(--panel-bg);
+      color: var(--text);
+      font-family: 'Press Start 2P', monospace;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><u>Unequivocal, Undenyable, Universal Truths</u></h1>
+  </header>
+  <main>
+    <!-- Top 10 list display (assumed from your previous code) -->
+    <h2>Top 10 TV Shows</h2>
+    <p class="description">
+      A mix of comedy, drama, animation, and action — this is the ultimate list of shows I’d recommend to just about anyone.
+    </p>
+    <ol>
+      <li>Andor</li>
+      <li>Arcane</li>
+      <li>Samurai Champloo</li>
+      <li>Harley Quinn</li>
+      <li>Peaky Blinders</li>
+      <li>Mad Men</li>
+      <li>Band of Brothers</li>
+      <li>Seinfeld</li>
+      <li>Bob’s Burgers</li>
+      <li>Frieren: Beyond Journey’s End</li>
+    </ol>
+
+    <!-- Suggest a Ranking Topic form with Formspree -->
+    <h2>Suggest a Ranking Topic</h2>
+    <form id="suggestion-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <label for="topic">What kind of ranking ist should I make next?</label>
+      <input
+        type="text"
+        id="topic"
+        name="topic"
+        placeholder="e.g. Best Gamecube Games"
+        required
+      />
+
+      <label for="notes">Optional Notes</label>
+      <input
+        type="text"
+        id="notes"
+        name="notes"
+        placeholder="Why this topic? (optional)"
+      />
+
+      <button type="submit">Submit Suggestion</button>
+    </form>
+  </main>
+</body>
+</html>
