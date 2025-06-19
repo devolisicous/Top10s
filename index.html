@@ -48,24 +48,24 @@
       font-style: italic;
       min-height: 2.5em;
     }
-    .list-wrapper {
-      min-height: 240px; /* Fixed height to prevent shifting */
+    #top10-section {
+      transition: opacity 0.75s ease-in-out;
+      opacity: 1;
+      min-height: 480px;
       display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      margin: 0 auto 1rem auto;
-      max-width: 400px;
+      flex-direction: column;
+      align-items: center;
     }
     ol {
       background: #1a0933;
       border-radius: 10px;
-      padding: 1rem 1rem 1rem 4rem; /* left padding increased */
+      padding: 1rem 1rem 1rem 4rem;
       font-size: 0.75rem;
       color: #00ffe0;
       box-shadow: 0 0 15px #ff00cc50;
       list-style-position: outside;
-      margin: 0; /* Remove default margin since wrapper controls spacing */
-      width: 100%;
+      margin: 1.5rem auto 1rem;
+      max-width: 400px;
       text-align: left;
     }
     li {
@@ -125,12 +125,6 @@
       font-family: 'Press Start 2P', monospace;
       resize: vertical;
     }
-
-    /* Fade animation for the list section */
-    #top10-section {
-      transition: opacity 0.7s ease; /* Slightly slower smoother fade */
-      opacity: 1;
-    }
   </style>
 </head>
 <body>
@@ -138,20 +132,18 @@
     <h1><u>Unequivocal, Undeniable, Universal Truths</u></h1> 
   </header>
   <main>
-    <section id="top10-section" tabindex="0" aria-live="polite" aria-label="Ranking list section">
+    <section id="top10-section">
       <h2 id="list-title"></h2>
       <p class="description" id="list-description"></p>
-      <div class="list-wrapper">
-        <ol id="list-items" role="list"></ol>
-      </div>
+      <ol id="list-items"></ol>
       <div class="nav-buttons">
-        <button id="prev-btn" aria-label="Previous list">Previous</button>
-        <button id="next-btn" aria-label="Next list">Next</button>
+        <button id="prev-btn">Previous</button>
+        <button id="next-btn">Next</button>
       </div>
     </section>
 
     <h2>Suggest a Ranking Topic</h2>
-    <form action="https://formspree.io/f/xblykblv" method="POST" aria-label="Suggest a ranking topic form">
+    <form action="https://formspree.io/f/xblykblv" method="POST">
       <label for="topic">Suggested Topic</label>
       <input type="text" id="topic" name="topic" placeholder="e.g. Top 10 Fruits" required />
       
@@ -238,9 +230,7 @@
     const itemsEl = document.getElementById("list-items");
 
     function renderList(index) {
-      // fade out
       top10Section.style.opacity = 0;
-
       setTimeout(() => {
         const list = lists[index];
         titleEl.textContent = list.title;
@@ -249,4 +239,34 @@
         list.items.forEach((item) => {
           const li = document.createElement("li");
           li.textContent = item;
-          itemsEl.appendCh
+          itemsEl.appendChild(li);
+        });
+        top10Section.style.opacity = 1;
+      }, 400); // slightly longer to match transition
+    }
+
+    function showNext() {
+      currentIndex = (currentIndex + 1) % lists.length;
+      renderList(currentIndex);
+    }
+
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + lists.length) % lists.length;
+      renderList(currentIndex);
+    }
+
+    document.getElementById("next-btn").addEventListener("click", showNext);
+    document.getElementById("prev-btn").addEventListener("click", showPrev);
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") {
+        showNext();
+      } else if (e.key === "ArrowLeft") {
+        showPrev();
+      }
+    });
+
+    renderList(currentIndex);
+  </script>
+</body>
+</html>
