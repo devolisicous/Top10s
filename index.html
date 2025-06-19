@@ -51,7 +51,7 @@
     ol {
       background: #1a0933;
       border-radius: 10px;
-      padding: 1rem 1rem 1rem 2.5rem;
+      padding: 1rem 1rem 1rem 4.5rem;
       font-size: 0.75rem;
       color: #00ffe0;
       box-shadow: 0 0 15px #ff00cc50;
@@ -114,6 +114,12 @@
       background-color: #1a0933;
       color: #00ffe0;
       font-family: 'Press Start 2P', monospace;
+    }
+
+    /* Fade animation for the list section */
+    #top10-section {
+      transition: opacity 0.5s ease;
+      opacity: 1;
     }
   </style>
 </head>
@@ -209,8 +215,8 @@
           "Into the Spiderverse",
           "Your Name",
           "How to Train your Dragon",
-          "Winnie the Pooh",
           "Prince of Egypt",
+          "Winnie the Pooh",
           "Fantastic Mr Fox",
           "Meet the Robinsons",
           "Megamind",
@@ -220,28 +226,51 @@
     ];
 
     let currentIndex = 0;
+    const top10Section = document.getElementById("top10-section");
+    const titleEl = document.getElementById("list-title");
+    const descEl = document.getElementById("list-description");
+    const itemsEl = document.getElementById("list-items");
 
     function renderList(index) {
-      const list = lists[index];
-      document.getElementById("list-title").textContent = list.title;
-      document.getElementById("list-description").textContent = list.description || "";
-      const ol = document.getElementById("list-items");
-      ol.innerHTML = "";
-      list.items.forEach((item) => {
-        const li = document.createElement("li");
-        li.textContent = item;
-        ol.appendChild(li);
-      });
+      // fade out
+      top10Section.style.opacity = 0;
+
+      setTimeout(() => {
+        const list = lists[index];
+        titleEl.textContent = list.title;
+        descEl.textContent = list.description || "";
+        itemsEl.innerHTML = "";
+        list.items.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = item;
+          itemsEl.appendChild(li);
+        });
+
+        // fade in
+        top10Section.style.opacity = 1;
+      }, 300); // matches fade transition time
     }
 
-    document.getElementById("prev-btn").addEventListener("click", () => {
-      currentIndex = (currentIndex - 1 + lists.length) % lists.length;
-      renderList(currentIndex);
-    });
-
-    document.getElementById("next-btn").addEventListener("click", () => {
+    function showNext() {
       currentIndex = (currentIndex + 1) % lists.length;
       renderList(currentIndex);
+    }
+
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + lists.length) % lists.length;
+      renderList(currentIndex);
+    }
+
+    document.getElementById("next-btn").addEventListener("click", showNext);
+    document.getElementById("prev-btn").addEventListener("click", showPrev);
+
+    // Keyboard navigation: left arrow = prev, right arrow = next
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") {
+        showNext();
+      } else if (e.key === "ArrowLeft") {
+        showPrev();
+      }
     });
 
     // Initial render
