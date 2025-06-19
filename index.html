@@ -95,6 +95,7 @@
       max-width: 800px;
       margin-left: auto;
       margin-right: auto;
+      text-align: left;
     }
     label {
       display: block;
@@ -114,6 +115,7 @@
       background-color: #1a0933;
       color: #00ffe0;
       font-family: 'Press Start 2P', monospace;
+      resize: vertical;
     }
 
     /* Fade animation for the list section */
@@ -139,9 +141,13 @@
     </section>
 
     <h2>Suggest a Ranking Topic</h2>
-    <form action="https://formspree.io/f/xblykblv" method="POST">
+    <form action="https://formspree.io/f/yourFormID" method="POST">
       <label for="topic">Suggested Topic</label>
       <input type="text" id="topic" name="topic" placeholder="e.g. Best Animated Movies" required />
+      
+      <label for="details">Why is this a good ranking topic?</label>
+      <textarea id="details" name="details" rows="4" placeholder="Explain why this topic is interesting or important" ></textarea>
+      
       <button type="submit">Submit Suggestion</button>
     </form>
   </main>
@@ -199,7 +205,7 @@
       },
       {
         title: "Top 10 Animated Movies",
-        description: "",
+        description: "Animated:",
         items: [
           "Princess Mononoke",
           "Into the Spiderverse",
