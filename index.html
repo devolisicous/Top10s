@@ -139,9 +139,9 @@
     </section>
 
     <h2>Suggest a Ranking Topic</h2>
-    <form>
+    <form action="https://formspree.io/f/xblykblv" method="POST">
       <label for="topic">Suggested Topic</label>
-      <input type="text" id="topic" name="topic" placeholder="e.g. Best Animated Movies" />
+      <input type="text" id="topic" name="topic" placeholder="e.g. Best Animated Movies" required />
       <button type="submit">Submit Suggestion</button>
     </form>
   </main>
@@ -150,8 +150,7 @@
     const lists = [
       {
         title: "Top 10 TV Shows",
-        description:
-          "",
+        description: "",
         items: [
           "Andor",
           "Arcane",
@@ -200,7 +199,7 @@
       },
       {
         title: "Top 10 Animated Movies",
-        description: "Animated:",
+        description: "",
         items: [
           "Princess Mononoke",
           "Into the Spiderverse",
